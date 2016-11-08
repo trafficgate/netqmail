@@ -1,0 +1,40 @@
+If you have glibc-2.3.1 then none of the software written by djb will
+compile because of an incompatible declaration of errno.
+
+Here you can find patches correcting this problem.
+
+To use the patches
+==================
+
+From the top distribution directory, apply the appropriate errno patch
+with -p1.  So, for example, for mess822, you would do
+
+tar zxvf mess822-0.58.tar.gz
+cd mess822-0.58
+patch -p1 < /path/to/mess822-0.58.errno.patch
+
+In case of daemontools, you need the following adjustment:
+
+tar zxvf daemontools-0.76.tar.gz
+cd admin/daemontools-0.76
+patch -p1 /path/to/daemontools-0.76.errno.patch
+
+Notes
+-----
+
+ucspi-tcp: 
+
+	in addition to the errno patch, there is the a_record patch.
+	It allows you to specify the error that will be returned
+        for a zone that has only A records in it.
+
+ucspi-tcp-0.88.nodefaultrbl.patch:
+
+	This patch changes the behavior of rblsmtpd so that if  
+	no `-r' flag is given, than instead of falling back to 
+	rbl.maps.vix.com as the default RBL, rblsmtpd assumes 
+	that no RBL is to be used.
+
+
+These notes were originally written by Mate Wierdl, and have been
+modified for this distribution by Russell Nelson.
